@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "Terms of Service | PropFundingCodes";
+---
+
+<Layout title={title}>
+  <Header />
+  <main class="container py-12 max-w-4xl">
+    <h1 class="mb-8">Terms of Service</h1>
+    <div class="card prose prose-invert max-w-none">
+      <p class="text-gray-400">Last updated: January 29, 2026</p>
+      
+      <h3>1. Acceptance of Terms</h3>
+      <p>By accessing PropFundingCodes.com, you agree to be bound by these Terms of Service.</p>
+      
+      <h3>2. Use of Content</h3>
+      <p>Content on this site is for informational purposes. Promo codes are subject to change by the respective prop firms at any time. We do not guarantee the validity of any code, although we make best efforts to verify them.</p>
+      
+      <h3>3. Limitation of Liability</h3>
+      <p>In no event shall PropFundingCodes be liable for any damages arising out of the use or inability to use the materials on this website.</p>
+      
+      <h3>4. Trading Risks</h3>
+      <p>Trading futures involves significant risk. You acknowledge that you carry full responsibility for your trading decisions.</p>
+    </div>
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import propFirms from '../../data/propfirms.json';
+
+const title = "Prop Firm Comparisons | Side-by-Side Analysis 2026";
+const description = "Compare top prop trading firms side-by-side. Analyze profit splits, drawdown rules, and account sizes to find the best firm for you.";
+
+// Generate top comparisons for the "Popular" section
+const topFirms = propFirms.slice(0, 3); // Top 3: Apex, Bulenox, TopStep (based on JSON order)
+const otherFirms = propFirms.slice(3);
+---
+
+<Layout title={title} description={description}>
+  <Header />
+  
+  <main>
+    <section class="hero bg-slate-900/50 min-h-[40vh]">
+      <div class="container text-center">
+        <h1 class="mb-6">
+          Compare <span class="text-gradient">Prop Firms</span>
+        </h1>
+        <p class="subtitle mx-auto">
+          Don't know which firm to choose? Compare them head-to-head to see which rules fit your trading style.
+        </p>
+      </div>
+    </section>
+    
+    <section class="section">
+      <div class="container">
+        
+        {topFirms.map(mainFirm => (
+          <div class="mb-12">
+            <h2 class="text-2xl font-bold text-white mb-6 border-b border-slate-700 pb-2">
+              Compare {mainFirm.name} vs Others
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {propFirms.filter(f => f.slug !== mainFirm.slug).map(subFirm => (
+                <a 
+                  href={`/compare/${mainFirm.slug}-vs-${subFirm.slug}`}
+                  class="card p-4 hover:bg-slate-800 transition flex justify-between items-center"
+                >
+                  <span class="font-semibold text-gray-300">{mainFirm.name} <span class="text-gray-500 text-sm">vs</span> {subFirm.name}</span>
+                  <span class="text-emerald-400">→</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+        
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

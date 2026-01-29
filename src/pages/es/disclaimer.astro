@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = "Divulgación de Riesgos y Afiliados | PropFundingCodes";
+---
+
+<Layout title={title}>
+  <Header />
+  <main class="container py-12 max-w-4xl">
+    <h1 class="mb-8">Divulgación de Riesgos y Descargos</h1>
+    
+    <div class="card space-y-8">
+      <section>
+        <h2 class="text-white font-bold mb-4">Regla CFTC 4.41 - Resultados Hipotéticos</h2>
+        <p class="text-gray-400 mb-4">
+          Los resultados de rendimiento hipotéticos o simulados tienen ciertas limitaciones inherentes. A diferencia de un registro de rendimiento real, los resultados simulados no representan operaciones reales. Además, dado que las operaciones no se han ejecutado, los resultados pueden haber compensado en exceso o en defecto el impacto, si lo hubiera, de ciertos factores del mercado, como la falta de liquidez. No se hace ninguna representación de que alguna cuenta logrará o es probable que logre ganancias o pérdidas similares a las mostradas.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-white font-bold mb-4">Advertencia de Riesgo en Futuros</h2>
+        <p class="text-gray-400 mb-4">
+          El trading de futuros y opciones conlleva grandes recompensas potenciales, pero también grandes riesgos potenciales. Debe ser consciente de los riesgos y estar dispuesto a aceptarlos para invertir en los mercados de futuros. No opere con dinero que no pueda permitirse perder.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-white font-bold mb-4">Divulgación de Afiliados</h2>
+        <p class="text-gray-400 mb-4">
+          PropFundingCodes.com mantiene relaciones de afiliados con muchas de las empresas mencionadas en este sitio (Apex, TopStep, etc.).
+        </p>
+        <p class="text-gray-400">
+          Esto significa que si hace clic en un enlace y compra un producto, podemos recibir una comisión sin costo adicional para usted. De hecho, usar nuestros enlaces a menudo le ahorra dinero a través de nuestros códigos de descuento exclusivos.
+        </p>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>

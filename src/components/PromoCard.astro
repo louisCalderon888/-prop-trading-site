@@ -1,0 +1,111 @@
+---
+interface Props {
+  name: string;
+  code: string | null;
+  discount: string;
+  link: string;
+  logo?: string;
+  isExclusive?: boolean;
+  verified?: boolean;
+  expiresAt?: string;
+}
+
+const { 
+  name, 
+  code, 
+  discount, 
+  link, 
+  logo,
+  isExclusive = false,
+  verified = true,
+  expiresAt
+} = Astro.props;
+
+const hasCode = code !== null && code !== '';
+---
+
+<div class="card card-glass flex flex-col gap-4">
+  <div class="flex items-start justify-between">
+    <div class="flex items-center gap-3">
+      {logo ? (
+        <img src={logo} alt={`${name} logo`} class="w-10 h-10 rounded-lg object-contain bg-white p-1" />
+      ) : (
+        <div class="w-10 h-10 rounded-lg bg-slate-700 flex items-center justify-center text-lg font-bold text-emerald-400">
+          {name.charAt(0)}
+        </div>
+      )}
+      <div>
+        <h3 class="font-semibold text-white">{name}</h3>
+        {verified && (
+          <span class="text-xs text-emerald-400 flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+            </svg>
+            Verified
+          </span>
+        )}
+      </div>
+    </div>
+    
+    <span class="badge-discount">{discount}</span>
+  </div>
+  
+  {hasCode && (
+    <div class="promo-code">
+      <span class="code-text">{code}</span>
+      <button 
+        class="copy-btn"
+        data-code={code}
+        aria-label={`Copy code ${code}`}
+      >
+        Copy
+      </button>
+    </div>
+  )}
+  
+  {expiresAt && (
+    <p class="text-xs text-gray-400">
+      ⏰ Expires: {expiresAt}
+    </p>
+  )}
+  
+  {isExclusive && (
+    <span class="text-xs text-amber-400 font-medium">
+      ⭐ Exclusive Deal
+    </span>
+  )}
+  
+  <a 
+    href={link} 
+    target="_blank" 
+    rel="noopener noreferrer"
+    class="btn btn-cta w-full mt-auto"
+  >
+    Get Discount →
+  </a>
+</div>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const code = btn.getAttribute('data-code');
+      if (code) {
+        await navigator.clipboard.writeText(code);
+        const originalText = btn.textContent;
+        btn.textContent = '✓ Copied!';
+        btn.classList.add('bg-green-600');
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.classList.remove('bg-green-600');
+        }, 2000);
+      }
+    });
+  });
+</script>
+
+<style>
+  .code-text {
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+  }
+</style>

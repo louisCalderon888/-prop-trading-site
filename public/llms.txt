@@ -1,0 +1,23 @@
+# Prop Funding Codes
+
+> Best promo codes and discounts for prop trading firms. Verified daily.
+
+## Prop Firm Directory
+- [Apex Trader Funding](/prop-firms/apex): 50% off with promo code OTBAOPUX
+- [Bulenox](/prop-firms/bulenox): Exclusive verified discounts
+- [TopStep](/prop-firms/topstep): Verified promo codes
+- [Take Profit Trader](/prop-firms/take-profit-trader): 40% off with code NOFEE40
+
+## Platform
+- [NinjaTrader](/ninjatrader): The #1 futures trading platform for prop trading.
+
+## Resources
+- [All Promo Codes](/promo-codes): Complete list of verified coupons.
+- [FAQ](/faq): Common questions about evaluations, payouts, and rules.
+- [Request a Firm](/request-firm): Suggest new prop firms for us to track.
+
+## Data Structure
+We provide structured data on:
+- Profit Splits (typically 80-90%)
+- Drawdown Rules (Trailing vs EOD)
+- Account Sizes ($25K - $300K)

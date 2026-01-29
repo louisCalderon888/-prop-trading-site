@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "NinjaTrader for Prop Trading | Download Free Platform";
+const description = "Get started with NinjaTrader, the #1 platform for futures prop trading. Download for free, powerful charting, and automated strategy support.";
+---
+
+<Layout title={title} description={description}>
+  <Header />
+  
+  <main>
+    <!-- HERO -->
+    <section class="hero bg-slate-900/50">
+      <div class="container text-center">
+        <h1 class="mb-6">
+          Trade with <span class="text-emerald-400">NinjaTrader</span>
+        </h1>
+        <p class="subtitle mx-auto">
+          The preferred platform for 90% of prop trading firms. Advanced charting, market analysis, and automated trading capabilities.
+        </p>
+        
+        <div class="flex gap-4 justify-center">
+          <a 
+            href="https://ninjatraderdomesticvendor.sjv.io/MA9WEq" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="btn btn-primary"
+          >
+            Download NinjaTrader (Free) →
+          </a>
+        </div>
+        
+        <p class="text-xs text-gray-500 mt-4 max-w-2xl mx-auto">
+          *NinjaTrader is a registered trademark of NinjaTrader Group, LLC. We are an authorized vendor/affiliate.
+        </p>
+      </div>
+    </section>
+    
+    <!-- WHY NINJATRADER -->
+    <section class="section">
+      <div class="container">
+        <h2 class="text-center mb-12">Why Prop Traders Choose NinjaTrader</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="card">
+            <h3 class="font-bold text-white mb-4">1. Advanced Charting</h3>
+            <p class="text-gray-400">
+              Industry-leading charting with thousands of indicators and customization options. Perfect for both scalpers and swing traders.
+            </p>
+          </div>
+          
+          <div class="card">
+            <h3 class="font-bold text-white mb-4">2. Automation (NinjaScript)</h3>
+            <p class="text-gray-400">
+              Build and run automated trading strategies using C#. Backtest your ideas with historical data before risking capital.
+            </p>
+          </div>
+          
+          <div class="card">
+            <h3 class="font-bold text-white mb-4">3. Market Replay</h3>
+            <p class="text-gray-400">
+              Practice any time, even on weekends. The Market Replay feature looks and feels exactly like live trading.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- DATA FEED INFO -->
+    <section class="section bg-slate-900/50">
+      <div class="container max-w-4xl">
+        <h2 class="text-center mb-8">Data Feeds & Connectivity</h2>
+        
+        <div class="card flex flex-col md:flex-row gap-8 items-center">
+          <div class="flex-1">
+            <h3 class="font-bold text-white mb-2">Powered by Rithmic or CQG</h3>
+            <p class="text-gray-400 mb-4">
+              Most prop firms (like Apex, TopStep, Bulenox) connect to NinjaTrader via Rithmic or CQG data feeds. This ensures low-latency execution for your trades.
+            </p>
+            <p class="text-gray-400 text-sm">
+              Note: When you sign up with a prop firm, they typically provide the license key and data feed credentials you need.
+            </p>
+          </div>
+          <div class="flex-shrink-0">
+             <div class="w-32 h-32 bg-slate-800 rounded-lg flex items-center justify-center text-4xl">
+               📡
+             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- COMPATIBLE FIRMS -->
+    <section class="section">
+      <div class="container text-center">
+        <h2 class="mb-8">Compatible Prop Firms</h2>
+        <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
+          Almost all major futures prop firms support NinjaTrader. Here are some of our top picks:
+        </p>
+        
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/prop-firms/apex" class="btn btn-secondary">Apex Trader Funding</a>
+          <a href="/prop-firms/topstep" class="btn btn-secondary">TopStep</a>
+          <a href="/prop-firms/bulenox" class="btn btn-secondary">Bulenox</a>
+          <a href="/prop-firms/tradeify" class="btn btn-secondary">Tradeify</a>
+          <a href="/prop-firms/elite" class="btn btn-secondary">Elite Trader Funding</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

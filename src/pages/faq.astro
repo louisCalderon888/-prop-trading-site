@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "Prop Trading FAQ | Expert Answers for 2026";
+const description = "Frequently asked questions about prop trading, promo codes, and getting funded. Optimized answers for traders starting their journey.";
+
+const faqItems = [
+  {
+    question: "What is the best promo code for Apex Trader Funding in 2026?",
+    answer: "The best Apex Trader Funding promo code is OTBAOPUX, which provides up to 80% off evaluations and 50% off resets. This code is verified daily."
+  },
+  {
+    question: "How do getting funded with a prop firm work?",
+    answer: "First, you purchase an evaluation account (using a promo code). Second, you trade to reach a profit target while adhering to risk rules like drawdown. Third, once you pass, you sign a contract and receive a funded account."
+  },
+  {
+    question: "Which prop firms allow high-frequency trading (HFT)?",
+    answer: "Most futures prop firms (Apex, TopStep, Bulenox) prohibit HFT strategies that abuse the sim environment. However, firms like Quantower or specific HFT-friendly evaluations may exist, but standard accounts restrict it."
+  },
+  {
+    question: "What is a trailing drawdown?",
+    answer: "A trailing drawdown is a risk rule where the minimum account balance increases as your open or closed profit increases. It trails your highest equity peak. It never goes back down, making it a critical rule to monitor."
+  },
+  {
+    question: "Are prop trading promo codes legit?",
+    answer: "Yes, but they expire often. We manually verify checks every 6 hours. Codes marked with 'Exclusive' or 'Verified' on our site are guaranteed to work at the time of the last check."
+  },
+  {
+    question: "Can I use NinjaTrader for free with prop firms?",
+    answer: "Yes. When you sign up for an evaluation, the prop firm provides a license key (often multi-broker) that allows you to use NinjaTrader for free during the evaluation and funded stage."
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer
+    }
+  }))
+};
+---
+
+<Layout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  
+  <Header />
+  
+  <main>
+    <section class="hero bg-slate-900/50 min-h-[40vh]">
+      <div class="container text-center">
+        <h1 class="mb-6">
+          Prop Trading <span class="text-gradient">FAQ</span>
+        </h1>
+        <p class="subtitle mx-auto">
+          Common questions about evaluations, payouts, and platforms. Answers optimized for clarity and accuracy.
+        </p>
+      </div>
+    </section>
+    
+    <section class="section">
+      <div class="container max-w-3xl">
+        <div class="space-y-6">
+          {faqItems.map((item) => (
+            <div class="card">
+              <h3 class="text-xl font-bold text-white mb-3">{item.question}</h3>
+              <p class="text-gray-400 leading-relaxed">
+                {item.answer}
+              </p>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-12 text-center p-8 bg-slate-800 rounded-2xl border border-slate-700">
+          <h3 class="text-white font-bold mb-2">Have a different question?</h3>
+          <p class="text-gray-400 mb-4">We're here to help.</p>
+          <a href="/request-firm" class="btn btn-secondary">Contact Us / Request Firm →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

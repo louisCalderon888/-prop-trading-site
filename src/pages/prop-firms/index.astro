@@ -1,0 +1,101 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PromoCard from '../../components/PromoCard.astro';
+import propFirms from '../../data/propfirms.json';
+
+const title = "Best Prop Trading Firms Directory 2026 | Verified List";
+const description = "Complete directory of verified prop trading firms for futures. Compare rules, profit splits, account sizes, and current promo codes. Updated daily.";
+
+// Semantic Triples for AEO
+const semanticTriples = propFirms.map(firm => ({
+  "@type": "ListItem",
+  "position": propFirms.indexOf(firm) + 1,
+  "item": {
+    "@type": "Organization",
+    "name": firm.name,
+    "description": `${firm.name} offers funded accounts from $${(firm.minAccount/1000)}K to $${(firm.maxAccount/1000)}K. Profit split is ${firm.profitSplit}.`,
+    "url": `https://prop.louiscalderon.dev/prop-firms/${firm.slug}`
+  }
+}));
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": semanticTriples
+};
+---
+
+<Layout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  
+  <Header />
+  
+  <main>
+    <section class="hero bg-slate-900/50 min-h-[40vh]">
+      <div class="container text-center">
+        <h1 class="mb-4">
+          Verified <span class="text-gradient">Prop Firm Directory</span>
+        </h1>
+        <p class="subtitle mx-auto">
+          Compare the best prop trading firms for futures. All firms in this directory support NinjaTrader or Tradovate and have been verified for payouts and reliability.
+        </p>
+      </div>
+    </section>
+    
+    <section class="section">
+      <div class="container">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {propFirms.map((firm) => (
+            <PromoCard 
+              name={firm.name}
+              code={firm.code}
+              discount={firm.discount}
+              link={firm.link}
+              isExclusive={firm.isExclusive}
+              verified={firm.verified}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <section class="section bg-slate-900/50">
+      <div class="container max-w-4xl">
+        <h2 class="text-center mb-8">How to Choose a Prop Firm</h2>
+        
+        <div class="grid gap-8">
+          <div class="card">
+            <h3 class="text-xl font-bold text-white mb-2">1. Profit Split</h3>
+            <p class="text-gray-400">
+              Most firms offer an 80/20 or 90/10 split. This means you keep 80-90% of your profits. 
+              <strong>Apex Trader Funding</strong> and <strong>Bulenox</strong> offer 90% splits, which is the industry standard for top-tier firms.
+            </p>
+          </div>
+          
+          <div class="card">
+            <h3 class="text-xl font-bold text-white mb-2">2. Drawdown Type</h3>
+            <p class="text-gray-400">
+              Drawdown rules determine when you lose the account.
+              <strong>Trailing Drawdown</strong> moves up as your account balance grows (harder).
+              <strong>End-of-Day (EOD) Drawdown</strong> only updates at market close (easier).
+              TopStep and MyFundedFutures are popular for their EOD drawdown rules.
+            </p>
+          </div>
+          
+          <div class="card">
+            <h3 class="text-xl font-bold text-white mb-2">3. Payout Frequency</h3>
+            <p class="text-gray-400">
+              How often can you withdraw profits?
+              Some firms pay daily (like Apex after a threshold), others weekly or monthly.
+              Always check the "Payout Policy" before signing up.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

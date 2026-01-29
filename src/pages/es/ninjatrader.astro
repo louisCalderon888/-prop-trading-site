@@ -1,0 +1,97 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = "NinjaTrader para Prop Trading | Descarga Gratis";
+const description = "Empieza con NinjaTrader, la plataforma #1 para trading de futuros en cuentas de fondeo. Descarga gratis, gráficos avanzados y trading automático.";
+---
+
+<Layout title={title} description={description}>
+  <Header />
+  
+  <main>
+    <!-- HERO -->
+    <section class="hero bg-slate-900/50">
+      <div class="container text-center">
+        <h1 class="mb-6">
+          Opera con <span class="text-emerald-400">NinjaTrader</span>
+        </h1>
+        <p class="subtitle mx-auto">
+          La plataforma preferida por el 90% de las empresas de fondeo. Gráficos avanzados, análisis de mercado y trading automático.
+        </p>
+        
+        <div class="flex gap-4 justify-center">
+          <a 
+            href="https://ninjatraderdomesticvendor.sjv.io/MA9WEq" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="btn btn-primary"
+          >
+            Descargar NinjaTrader (Gratis) →
+          </a>
+        </div>
+        
+        <p class="text-xs text-gray-500 mt-4 max-w-2xl mx-auto">
+          *NinjaTrader es una marca registrada de NinjaTrader Group, LLC. Somos un proveedor/afiliado autorizado.
+        </p>
+      </div>
+    </section>
+    
+    <!-- WHY NINJATRADER -->
+    <section class="section">
+      <div class="container">
+        <h2 class="text-center mb-12">¿Por Qué Elegir NinjaTrader?</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="card">
+            <h3 class="font-bold text-white mb-4">1. Gráficos Avanzados</h3>
+            <p class="text-gray-400">
+              Gráficos líderes en la industria con miles de indicadores y opciones de personalización. Perfecto para scalping y swing trading.
+            </p>
+          </div>
+          
+          <div class="card">
+            <h3 class="font-bold text-white mb-4">2. Automatización (NinjaScript)</h3>
+            <p class="text-gray-400">
+              Crea y ejecuta estrategias automáticas usando C#. Haz backtesting de tus ideas con datos históricos antes de arriesgar capital.
+            </p>
+          </div>
+          
+          <div class="card">
+            <h3 class="font-bold text-white mb-4">3. Market Replay</h3>
+            <p class="text-gray-400">
+              Practica en cualquier momento, incluso fines de semana. La función Market Replay simula el mercado en vivo exactamente como ocurrió.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- DATA FEED INFO -->
+    <section class="section bg-slate-900/50">
+      <div class="container max-w-4xl">
+        <h2 class="text-center mb-8">Datos y Conectividad</h2>
+        
+        <div class="card flex flex-col md:flex-row gap-8 items-center">
+          <div class="flex-1">
+            <h3 class="font-bold text-white mb-2">Conectividad Rithmic o CQG</h3>
+            <p class="text-gray-400 mb-4">
+              La mayoría de prop firms (como Apex, TopStep, Bulenox) se conectan a NinjaTrader vía Rithmic o CQG. Esto asegura ejecución de baja latencia.
+            </p>
+            <p class="text-gray-400 text-sm">
+              Nota: Al registrarte con una prop firm, ellos te proveen la clave de licencia y credenciales de datos que necesitas.
+            </p>
+          </div>
+          <div class="flex-shrink-0">
+             <div class="w-32 h-32 bg-slate-800 rounded-lg flex items-center justify-center text-4xl">
+               📡
+             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

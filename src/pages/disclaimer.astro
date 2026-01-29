@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "Risk Disclosure & Affiliate Disclaimer | PropFundingCodes";
+const description = "Important risk disclosures regarding futures trading and affiliate relationships.";
+---
+
+<Layout title={title} description={description}>
+  <Header />
+  
+  <main class="container py-12 max-w-4xl">
+    <h1 class="mb-8">Risk Disclosure & Disclaimers</h1>
+    
+    <div class="card space-y-8">
+      <section>
+        <h2 class="text-white font-bold mb-4">CFTC Rule 4.41 - Hypothetical Simmulated Performance Disclaimer</h2>
+        <p class="text-gray-400 mb-4">
+          Hypothetical or simulated performance results have certain limitations. Unlike an actual performance record, simulated results do not represent actual trading. Also, since the trades have not been executed, the results may have under-or-over compensated for the impact, if any, of certain market factors, such as lack of liquidity. Simulated trading programs in general are also subject to the fact that they are designed with the benefit of hindsight. No representation is being made that any account will or is likely to achieve profit or losses similar to those shown.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-white font-bold mb-4">Futures Trading Risk Warning</h2>
+        <p class="text-gray-400 mb-4">
+          Commodity Futures Trading Commission (CFTC) Futures and Options trading has large potential rewards, but also large potential risk. You must be aware of the risks and be willing to accept them in order to invest in the futures and options markets. Don't trade with money you can't afford to lose. This is neither a solicitation nor an offer to Buy/Sell futures or options. No representation is being made that any account will or is likely to achieve profits or losses similar to those discussed on this web site. The past performance of any trading system or methodology is not necessarily indicative of future results.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-white font-bold mb-4">Affiliate Disclosure</h2>
+        <p class="text-gray-400 mb-4">
+          PropFundingCodes.com maintains affiliate relationships with many of the prop trading firms and vendors mentioned on this site, including but not limited to Apex Trader Funding, TopStep, Bulenox, and NinjaTrader.
+        </p>
+        <p class="text-gray-400 mb-4">
+          This means that if you click on a link and purchase a product or service, we may receive a commission at no extra cost to you. In fact, using our links often saves you money through our exclusive discount codes.
+        </p>
+        <p class="text-gray-400">
+          We only recommend firms and services that we have verified. However, you should always perform your own due diligence before purchasing any evaluation or trading service.
+        </p>
+      </section>
+      
+      <section>
+        <h2 class="text-white font-bold mb-4">Not Financial Advice</h2>
+        <p class="text-gray-400">
+          The content on this website is for informational and educational purposes only. It does not constitute financial advice. We are not financial advisors. Consult with a qualified financial professional before making any investment decisions.
+        </p>
+      </section>
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>

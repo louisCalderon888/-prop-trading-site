@@ -1,0 +1,27 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = "Términos de Servicio | PropFundingCodes";
+---
+
+<Layout title={title}>
+  <Header />
+  <main class="container py-12 max-w-4xl">
+    <h1 class="mb-8">Términos de Servicio</h1>
+    <div class="card prose prose-invert max-w-none">
+      <p class="text-gray-400">Última actualización: 29 de Enero, 2026</p>
+      
+      <h3>1. Aceptación</h3>
+      <p>Al acceder a PropFundingCodes.com, usted acepta estar obligado por estos Términos.</p>
+      
+      <h3>2. Uso del Contenido</h3>
+      <p>El contenido es informativo. Los códigos promocionales pueden cambiar en cualquier momento. No garantizamos la validez de ningún código, aunque nos esforzamos por verificarlos.</p>
+      
+      <h3>3. Riesgos</h3>
+      <p>El trading implica riesgo significativo. Usted es responsable de sus decisiones.</p>
+    </div>
+  </main>
+  <Footer />
+</Layout>

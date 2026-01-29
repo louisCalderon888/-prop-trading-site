@@ -1,0 +1,277 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PromoCard from '../../components/PromoCard.astro';
+
+// Featured promo codes data
+const featuredPromos = [
+  {
+    name: "Apex Trader Funding",
+    code: "OTBAOPUX",
+    discount: "50% OFF",
+    link: "https://apextraderfunding.com/member/aff/go/louiscalderon8887?c=OTBAOPUX",
+    isExclusive: true,
+    verified: true,
+  },
+  {
+    name: "Bulenox",
+    code: null,
+    discount: "Varía",
+    link: "https://bulenox.com/member/aff/go/520_741_8",
+    verified: true,
+  },
+  {
+    name: "Take Profit Trader",
+    code: "NOFEE40",
+    discount: "40% OFF",
+    link: "#",
+    verified: true,
+  },
+  {
+    name: "Tradeify",
+    code: "OTC",
+    discount: "30% OFF",
+    link: "#",
+    verified: true,
+  },
+  {
+    name: "Funded Futures Family",
+    code: "NINJA70",
+    discount: "70% OFF",
+    link: "#",
+    verified: true,
+  },
+];
+
+// FAQ Schema for AEO (Spanish)
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cuál es el mejor cupón para Apex Trader Funding en 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El mejor código promocional para Apex Trader Funding es OTBAOPUX, que ofrece 50% de descuento en evaluaciones. Este código es verificado regularmente."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué empresas de fondeo funcionan con NinjaTrader?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Más de 20 empresas soportan NinjaTrader, incluyendo Apex Trader Funding, TopStep, Bulenox, Tradeify y Elite Trader Funding."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Son legítimos estos códigos de descuento?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Verificamos todos los códigos cada 6 horas. Los marcados con ⭐ son códigos exclusivos de afiliado con ahorro garantizado."
+      }
+    }
+  ]
+};
+---
+
+<Layout title="Mejores Cupones de Prop Trading 2026 | Descuentos Verificados" description="Ahorra hasta 80% en evaluaciones de prop trading. Ofertas verificadas para Apex Trader Funding, TopStep y más. Actualizado diariamente.">
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  
+  <Header />
+  
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="container">
+        <h1>
+          Fondeate más Rápido con las<br />
+          <span class="text-gradient">Mejores Ofertas de Prop Trading</span>
+        </h1>
+        
+        <p class="subtitle">
+          Ahorra hasta 80% en evaluaciones. Opera en NinjaTrader, la plataforma #1 para futuros. Actualizado cada 6 horas.
+        </p>
+        
+        <div class="flex flex-wrap gap-4 justify-center mb-8">
+          <a href="/es/promo-codes" class="btn btn-cta">
+            Ver Todos los Cupones →
+          </a>
+          <a href="/es/ninjatrader" class="btn btn-secondary">
+            Sobre NinjaTrader
+          </a>
+        </div>
+        
+        <div class="trust-bar">
+          <span><span class="icon">✓</span> 20+ Empresas</span>
+          <span><span class="icon">✓</span> Actualizado 6h</span>
+          <span><span class="icon">✓</span> Descuentos Exclusivos</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- PROBLEM SECTION (PAS Framework) -->
+    <section class="section bg-slate-900/50">
+      <div class="container text-center max-w-3xl mx-auto">
+        <h2 class="mb-4">¿Cansado de Pagar de Más por Evaluaciones?</h2>
+        <p class="text-gray-400 text-lg">
+          Las evaluaciones de prop trading cuestan entre $150-$500. Sin los códigos correctos, estás perdiendo dinero. ¿Encontrar códigos que funcionen? La mayoría están expirados o son falsos.
+        </p>
+      </div>
+    </section>
+    
+    <!-- SOLUTION SECTION -->
+    <section class="section">
+      <div class="container">
+        <div class="text-center mb-12">
+          <h2 class="mb-4">Un Lugar para Todas las Ofertas</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            Rastreamos cada código promocional de 20+ empresas que soportan NinjaTrader. Actualizado cada 6 horas. Funcionamiento verificado. Máximo ahorro.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div class="card text-center">
+            <div class="text-4xl mb-2">⚡</div>
+            <h3 class="text-lg font-semibold mb-2">Actualización Real</h3>
+            <p class="text-gray-400 text-sm">Verificamos cada 6 horas</p>
+          </div>
+          <div class="card text-center">
+            <div class="text-4xl mb-2">⭐</div>
+            <h3 class="text-lg font-semibold mb-2">Ofertas Exclusivas</h3>
+            <p class="text-gray-400 text-sm">Descuentos únicos</p>
+          </div>
+          <div class="card text-center">
+            <div class="text-4xl mb-2">📊</div>
+            <h3 class="text-lg font-semibold mb-2">Solo Plataformas Top</h3>
+            <p class="text-gray-400 text-sm">NinjaTrader y Tradovate</p>
+          </div>
+          <div class="card text-center">
+            <div class="text-4xl mb-2">🔒</div>
+            <h3 class="text-lg font-semibold mb-2">Sin Spam</h3>
+            <p class="text-gray-400 text-sm">Solo códigos, sin email</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- FEATURED PROP FIRMS -->
+    <section class="section bg-slate-900/50">
+      <div class="container">
+        <div class="text-center mb-12">
+          <h2 class="mb-4">Cupones Destacados</h2>
+          <p class="text-gray-400">Actualizado: <span id="update-date"></span></p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {featuredPromos.map((promo) => (
+            <PromoCard 
+              name={promo.name}
+              code={promo.code}
+              discount={promo.discount}
+              link={promo.link}
+              isExclusive={promo.isExclusive}
+              verified={promo.verified}
+            />
+          ))}
+        </div>
+        
+        <div class="text-center mt-8">
+          <a href="/es/promo-codes" class="btn btn-primary">
+            Ver los 20+ Cupones →
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- NINJATRADER SECTION -->
+    <section class="section">
+      <div class="container">
+        <div class="card-glass card max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8">
+          <div class="flex-1">
+            <span class="text-emerald-400 text-sm font-semibold mb-2 block">PLATAFORMA RECOMENDADA</span>
+            <h2 class="mb-4">Opera con NinjaTrader</h2>
+            <p class="text-gray-400 mb-6">
+              NinjaTrader es la plataforma #1 para futuros, ofreciendo gráficos avanzados y herramientas de gestión de riesgo.
+            </p>
+            <a 
+              href="https://ninjatraderdomesticvendor.sjv.io/MA9WEq" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="btn btn-primary"
+            >
+              Obtén NinjaTrader Gratis →
+            </a>
+          </div>
+          <div class="flex-shrink-0">
+            <div class="w-48 h-48 bg-slate-700 rounded-lg flex items-center justify-center">
+              <span class="text-4xl font-bold text-emerald-400">NT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- FAQ SECTION (AEO Optimized) -->
+    <section class="section bg-slate-900/50">
+      <div class="container max-w-3xl">
+        <h2 class="text-center mb-12">Preguntas Frecuentes</h2>
+        
+        <div class="space-y-6">
+          <div class="card">
+            <h3 class="font-semibold text-white mb-2">¿Cuál es el mejor cupón para Apex Trader Funding?</h3>
+            <p class="text-gray-400">
+              El mejor código para Apex es <strong class="text-emerald-400">OTBAOPUX</strong>, con 50% de descuento. Verificado hoy.
+            </p>
+          </div>
+          
+          <div class="card">
+            <h3 class="font-semibold text-white mb-2">¿Qué empresas funcionan con NinjaTrader?</h3>
+            <p class="text-gray-400">
+              Más de 20 empresas, incluyendo Apex, TopStep, Bulenox y Tradeify. Mira nuestro <a href="/es/prop-firms" class="text-emerald-400">directorio completo</a>.
+            </p>
+          </div>
+          
+          <div class="card">
+            <h3 class="font-semibold text-white mb-2">¿Son reales los descuentos?</h3>
+            <p class="text-gray-400">
+              Sí. Verificamos manualmente. Los marcados con ⭐ tienen garantía de funcionamiento.
+            </p>
+          </div>
+        </div>
+        
+        <div class="text-center mt-8">
+          <a href="/es/faq" class="btn btn-secondary">Ver Todas las FAQ →</a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- FINAL CTA -->
+    <section class="section">
+      <div class="container text-center max-w-2xl mx-auto">
+        <h2 class="mb-4">¿Listo para Fondearte?</h2>
+        <p class="text-gray-400 mb-8">
+          Deja de pagar de más. Usa nuestros códigos verificados y empieza hoy.
+        </p>
+        <a href="/es/promo-codes" class="btn btn-cta text-lg px-8 py-3">
+          Obtener Mi Descuento →
+        </a>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<script>
+  const updateDate = document.getElementById('update-date');
+  if (updateDate) {
+    updateDate.textContent = new Date().toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+</script>

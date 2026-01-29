@@ -1,0 +1,100 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import PromoCard from '../../../components/PromoCard.astro';
+import propFirms from '../../../data/propfirms.json';
+
+const title = "Mejores Empresas de Prop Trading 2026 | Directorio Verificado";
+const description = "Directorio completo de empresas de fondeo verificadas. Compara reglas, split de ganancias y precios. Actualizado diariamente.";
+
+// Semantic Triples for AEO
+const semanticTriples = propFirms.map(firm => ({
+  "@type": "ListItem",
+  "position": propFirms.indexOf(firm) + 1,
+  "item": {
+    "@type": "Organization",
+    "name": firm.name,
+    "description": `${firm.name} ofrece cuentas fondeadas desde $${(firm.minAccount/1000)}K hasta $${(firm.maxAccount/1000)}K. Split de ganancias es ${firm.profitSplit}.`,
+    "url": `https://prop.louiscalderon.dev/es/prop-firms/${firm.slug}`
+  }
+}));
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": semanticTriples
+};
+---
+
+<Layout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  
+  <Header />
+  
+  <main>
+    <section class="hero bg-slate-900/50 min-h-[40vh]">
+      <div class="container text-center">
+        <h1 class="mb-4">
+          Directorio de <span class="text-gradient">Prop Firms</span>
+        </h1>
+        <p class="subtitle mx-auto">
+          Compara las mejores empresas de fondeo para futuros. Todas soportan NinjaTrader o Tradovate y han sido verificadas en pagos y fiabilidad.
+        </p>
+      </div>
+    </section>
+    
+    <section class="section">
+      <div class="container">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {propFirms.map((firm) => (
+            <PromoCard 
+              name={firm.name}
+              code={firm.code}
+              discount={firm.discount}
+              link={firm.link}
+              isExclusive={firm.isExclusive}
+              verified={firm.verified}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <section class="section bg-slate-900/50">
+      <div class="container max-w-4xl">
+        <h2 class="text-center mb-8">Cómo Elegir tu Cuenta de Fondeo</h2>
+        
+        <div class="grid gap-8">
+          <div class="card">
+            <h3 class="text-xl font-bold text-white mb-2">1. Split de Ganancias</h3>
+            <p class="text-gray-400">
+              La mayoría ofrece 80/20 o 90/10. Esto significa que te quedas con el 80-90% de tus ganancias.
+              <strong>Apex Trader Funding</strong> y <strong>Bulenox</strong> ofrecen 90%, el estándar de oro.
+            </p>
+          </div>
+          
+          <div class="card">
+            <h3 class="text-xl font-bold text-white mb-2">2. Tipo de Drawdown</h3>
+            <p class="text-gray-400">
+              El drawdown determina cuándo pierdes la cuenta.
+              <strong>Trailing Drawdown</strong> te persigue mientras ganas (más difícil).
+              <strong>End-of-Day (EOD)</strong> solo se actualiza al cierre del mercado (más fácil).
+              TopStep es popular por su drawdown EOD.
+            </p>
+          </div>
+          
+          <div class="card">
+            <h3 class="text-xl font-bold text-white mb-2">3. Frecuencia de Pagos</h3>
+            <p class="text-gray-400">
+              ¿Cada cuánto puedes retirar? Algunas pagan diario (como Apex tras umbral), otras semanal o mensual.
+              Siempre revisa la política de pagos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

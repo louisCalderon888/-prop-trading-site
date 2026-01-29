@@ -1,0 +1,105 @@
+---
+const currentPath = Astro.url.pathname;
+const isEs = currentPath.startsWith('/es');
+
+const navLinks = isEs ? [
+  { href: "/es", label: "Inicio" },
+  { href: "/es/prop-firms", label: "Empresas" },
+  { href: "/es/promo-codes", label: "Cupones" },
+  { href: "/es/ninjatrader", label: "NinjaTrader" },
+  { href: "/es/faq", label: "FAQ" },
+] : [
+  { href: "/", label: "Home" },
+  { href: "/prop-firms", label: "Prop Firms" },
+  { href: "/promo-codes", label: "Promo Codes" },
+  { href: "/ninjatrader", label: "NinjaTrader" },
+  { href: "/faq", label: "FAQ" },
+];
+
+// Language Switcher Logic
+const switchLang = (lang: string) => {
+  if (lang === 'en') {
+    return currentPath.replace('/es', '') || '/';
+  }
+  return `/es${currentPath === '/' ? '' : currentPath}`;
+};
+---
+
+<header class="nav">
+  <div class="container nav-container">
+    <a href={isEs ? "/es" : "/"} class="logo">
+      <span class="text-gradient font-bold text-xl">PropFundingCodes</span>
+    </a>
+    
+    <nav class="nav-links hidden md:flex">
+      {navLinks.map((link) => (
+        <a 
+          href={link.href} 
+          class:list={[
+            currentPath === link.href ? "text-white" : ""
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    
+    <div class="flex items-center gap-4">
+      <!-- Language Selector -->
+      <div class="flex items-center bg-slate-800 rounded border border-slate-700">
+        <a 
+          href={switchLang('en')} 
+          class={`px-2 py-1 text-xs font-bold ${!isEs ? 'bg-slate-700 text-white' : 'text-gray-400 hover:text-white'}`}
+        >
+          EN
+        </a>
+        <div class="w-[1px] h-4 bg-slate-700"></div>
+        <a 
+          href={("/es" + (currentPath === "/" ? "" : currentPath)).replace("//", "/").replace("/es/es", "/es")} 
+          class={`px-2 py-1 text-xs font-bold ${isEs ? 'bg-slate-700 text-white' : 'text-gray-400 hover:text-white'}`}
+          onclick="event.preventDefault(); window.location.href = this.href.replace(/\/es\/es/, '/es');"
+        >
+          ES
+        </a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden text-white" id="mobile-menu-btn" aria-label="Toggle menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Mobile Menu -->
+  <nav id="mobile-menu" class="hidden md:hidden bg-slate-800 border-t border-slate-700">
+    <div class="container py-4 flex flex-col gap-4">
+      {navLinks.map((link) => (
+        <a href={link.href} class="text-gray-300 hover:text-white">
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>
+
+
+<script>
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  mobileMenuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+</script>
+
+<style>
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+</style>

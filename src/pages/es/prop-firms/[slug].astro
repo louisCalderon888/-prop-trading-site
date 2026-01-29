@@ -1,0 +1,238 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import propFirms from '../../../data/propfirms.json';
+
+export async function getStaticPaths() {
+  return propFirms.map(firm => ({
+    params: { slug: firm.slug },
+    props: { firm },
+  }));
+}
+
+const { firm } = Astro.props;
+
+// Translate Features (Mapping simple strings or keeping EN if specific)
+// For MVP, we pass features as is, but UI strings are ES.
+
+const title = `Cupón ${firm.name} 2026 | Descuento del ${firm.discount}`;
+const description = `Obtén ${firm.discount} en evaluaciones de ${firm.name} con código ${firm.code || 'link verificado'}. Lee análisis de reglas, split y pagos.`;
+
+// AEO: Semantic Feature Descriptions
+const featuresList = firm.features.map(feature => ({
+  "@type": "LocationFeatureSpecification",
+  "name": feature,
+  "value": "True"
+}));
+
+// Schema: Product + FAQ
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": `Evaluación ${firm.name}`,
+  "description": description,
+  "brand": {
+    "@type": "Brand",
+    "name": firm.name
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "Variable", 
+    "availability": "https://schema.org/InStock",
+    "url": firm.link
+  },
+  "potentialAction": {
+    "@type": "BuyAction",
+    "target": firm.link
+  }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `¿Cuál es el mejor cupón para ${firm.name}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": firm.code 
+          ? `El mejor código para ${firm.name} es ${firm.code}, con un ${firm.discount}.` 
+          : `Actualmente el mejor descuento es ${firm.discount} usando nuestro enlace verificado.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `¿${firm.name} funciona con NinjaTrader?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `Sí, ${firm.name} soporta NinjaTrader. Puedes usar tu licencia o la que proveen gratis.`
+      }
+    }
+  ]
+};
+---
+
+<Layout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  
+  <Header />
+  
+  <main>
+    <!-- HERO -->
+    <section class="min-h-[50vh] flex flex-col justify-center items-center text-center p-8 bg-slate-900/50">
+      <div class="container">
+        <span class="text-emerald-400 font-mono text-sm mb-4 block">PROP FIRM VERIFICADA</span>
+        <h1 class="mb-6">Cupón {firm.name}</h1>
+        
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 max-w-2xl mx-auto mb-8">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-left">
+              <span class="text-gray-400 text-sm">Mejor Oferta</span>
+              <div class="text-3xl font-bold text-white mt-1">{firm.discount}</div>
+            </div>
+            
+            <div class="flex flex-col gap-2 w-full md:w-auto">
+              {firm.code ? (
+                <div class="promo-code justify-center w-full">
+                  <span class="code-text text-xl">{firm.code}</span>
+                  <button class="copy-btn px-4 py-2" data-code={firm.code}>Copiar</button>
+                </div>
+              ) : (
+                <span class="text-gray-400 italic">Descuento Automático</span>
+              )}
+              <a href={firm.link} class="btn btn-cta w-full text-center">Reclamar Oferta →</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="trust-bar justify-center text-gray-400 text-sm">
+          <span>✓ Split: {firm.profitSplit}</span>
+          <span>✓ Drawdown: {firm.drawdown}</span>
+          <span>✓ Pagos: {firm.payoutFrequency}</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- DETAILS GRID -->
+    <section class="section">
+      <div class="container">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          <!-- MAIN CONTENT -->
+          <div class="lg:col-span-2 space-y-8">
+            <div class="card">
+              <h2 class="text-2xl font-bold text-white mb-6 w-full">Resumen</h2>
+              
+              <div class="prose prose-invert max-w-none">
+                <p>
+                  <strong>{firm.name}</strong> te permite operar futuros con capital hasta <strong>${(firm.maxAccount/1000)}K</strong>. 
+                  No arriesgas tu propio capital, solo pagas una evaluación (desde ${(firm.minAccount/1000)*2} aprox) para demostrar tu habilidad.
+                </p>
+                
+                <h3 class="text-xl font-bold text-white mt-6 mb-4">Características Clave</h3>
+                <ul class="space-y-2">
+                  {firm.features.map(feature => (
+                    <li class="flex items-start gap-2">
+                      <span class="text-emerald-400 mt-1">✓</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                
+                <h3 class="text-xl font-bold text-white mt-6 mb-4">Reglas de Trading</h3>
+                <p>
+                  Para fondearte, debes alcanzar el objetivo sin tocar el <strong>Drawdown {firm.drawdown}</strong>. 
+                  El split de ganancias es <strong>{firm.profitSplit}</strong>, es decir, te quedas con la mayoría.
+                </p>
+              </div>
+            </div>
+            
+            <!-- COMPARE SECTION PLACEHOLDER -->
+            <div class="card">
+              <h3 class="text-xl font-bold text-white mb-4">Comparar {firm.name}</h3>
+              <p class="text-gray-400 mb-4">Mira como se compara {firm.name} contra otras:</p>
+              <div class="flex flex-wrap gap-4">
+                <a href={`/compare/${firm.slug}-vs-apex`} class="btn btn-secondary text-sm">vs Apex</a>
+                <a href={`/compare/${firm.slug}-vs-topstep`} class="btn btn-secondary text-sm">vs TopStep</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- SIDEBAR -->
+          <div class="space-y-6">
+            <div class="card sticky top-24">
+              <h3 class="text-lg font-bold text-white mb-4">Resumen Rápido</h3>
+              <div class="space-y-4 text-sm">
+                <div class="flex justify-between border-b border-slate-700 pb-2">
+                  <span class="text-gray-400">Cuenta Mín</span>
+                  <span class="text-white">${(firm.minAccount/1000)}K</span>
+                </div>
+                <div class="flex justify-between border-b border-slate-700 pb-2">
+                  <span class="text-gray-400">Cuenta Máx</span>
+                  <span class="text-white">${(firm.maxAccount/1000)}K</span>
+                </div>
+                <div class="flex justify-between border-b border-slate-700 pb-2">
+                  <span class="text-gray-400">Split</span>
+                  <span class="text-white text-emerald-400 font-bold">{firm.profitSplit}</span>
+                </div>
+                <div class="flex justify-between border-b border-slate-700 pb-2">
+                  <span class="text-gray-400">Pagos</span>
+                  <span class="text-white">{firm.payoutFrequency === 'Daily' ? 'Diario' : 'Semanal'}</span>
+                </div>
+                <div class="flex justify-between pb-2">
+                  <span class="text-gray-400">Plataforma</span>
+                  <span class="text-white capitalize">{firm.platform === 'both' ? 'Ninja / Tradovate' : firm.platform}</span>
+                </div>
+                
+                <a href={firm.link} class="btn btn-primary w-full mt-4">Visitar Sitio →</a>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+    
+    <!-- FAQ SPECIFIC -->
+    <section class="section bg-slate-900/50">
+      <div class="container max-w-3xl">
+        <h2 class="text-center mb-8">FAQ sobre {firm.name}</h2>
+        <div class="space-y-4">
+          <div class="card">
+            <h3 class="font-bold text-white mb-2">¿Cuál es el mejor cupón disponible?</h3>
+            <p class="text-gray-400">
+              {firm.code 
+                ? `Usa el código ${firm.code} para ahorrar ${firm.discount}.` 
+                : `Actualmente, la mejor oferta es ${firm.discount} con nuestro enlace.`}
+            </p>
+          </div>
+          <div class="card">
+            <h3 class="font-bold text-white mb-2">¿Puedo operar noticias?</h3>
+            <p class="text-gray-400">
+              La mayoría permite operar noticias en evaluación, pero revisa el reglamento oficial de {firm.name}.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const code = btn.getAttribute('data-code');
+      if (code) {
+        await navigator.clipboard.writeText(code);
+        btn.textContent = '✓';
+        setTimeout(() => { btn.textContent = 'Copiar'; }, 2000);
+      }
+    });
+  });
+</script>

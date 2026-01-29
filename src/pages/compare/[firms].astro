@@ -1,0 +1,151 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import propFirms from '../../data/propfirms.json';
+
+export async function getStaticPaths() {
+  const paths = [];
+  
+  // Create permutations: Firm A vs Firm B
+  for (let i = 0; i < propFirms.length; i++) {
+    for (let j = 0; j < propFirms.length; j++) {
+      if (i !== j) {
+        const firmA = propFirms[i];
+        const firmB = propFirms[j];
+        
+        paths.push({
+          params: { firms: `${firmA.slug}-vs-${firmB.slug}` },
+          props: { firmA, firmB },
+        });
+      }
+    }
+  }
+  
+  return paths;
+}
+
+const { firmA, firmB } = Astro.props;
+
+const title = `${firmA.name} vs ${firmB.name} | 2026 Comparison`;
+const description = `Detailed comparison of ${firmA.name} vs ${firmB.name}. Compare profit splits, drawdown rules, account sizes, and promo codes.`;
+
+// AEO: Semantic Comparison
+const comparisonSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": `${firmA.name} vs ${firmB.name} Comparison`,
+  "description": description,
+  "author": {
+    "@type": "Organization",
+    "name": "Prop Funding Codes"
+  },
+  "mainEntity": {
+    "@type": "Table",
+    "about": "Prop Firm Comparison"
+  }
+};
+---
+
+<Layout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(comparisonSchema)} />
+  
+  <Header />
+  
+  <main>
+    <section class="hero bg-slate-900/50 min-h-[40vh]">
+      <div class="container text-center">
+        <h1 class="mb-6">
+          <span class="text-white">{firmA.name}</span>
+          <span class="text-gray-500 text-2xl px-4">VS</span>
+          <span class="text-white">{firmB.name}</span>
+        </h1>
+        <p class="subtitle mx-auto">
+          Head-to-head comparison of profit splits, pricing, and trading rules.
+        </p>
+      </div>
+    </section>
+    
+    <section class="section">
+      <div class="container max-w-5xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="bg-slate-800 text-white">
+                <th class="p-4 rounded-tl-lg w-1/3">Feature</th>
+                <th class="p-4 w-1/3 text-center border-l border-slate-700">{firmA.name}</th>
+                <th class="p-4 rounded-tr-lg w-1/3 text-center border-l border-slate-700">{firmB.name}</th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-300">
+              <tr class="border-b border-slate-700 hover:bg-slate-900/30">
+                <td class="p-4 font-semibold text-white">Best Promo Code</td>
+                <td class="p-4 text-center border-l border-slate-700">
+                  {firmA.code ? (
+                    <span class="inline-block bg-slate-700 text-emerald-400 px-2 py-1 rounded font-mono text-sm">{firmA.code}</span>
+                  ) : <span class="text-gray-500">-</span>}
+                </td>
+                <td class="p-4 text-center border-l border-slate-700">
+                  {firmB.code ? (
+                     <span class="inline-block bg-slate-700 text-emerald-400 px-2 py-1 rounded font-mono text-sm">{firmB.code}</span>
+                  ) : <span class="text-gray-500">-</span>}
+                </td>
+              </tr>
+              <tr class="border-b border-slate-700 hover:bg-slate-900/30">
+                <td class="p-4 font-semibold text-white">Discount</td>
+                <td class="p-4 text-center border-l border-slate-700 font-bold text-emerald-500">{firmA.discount}</td>
+                <td class="p-4 text-center border-l border-slate-700 font-bold text-emerald-500">{firmB.discount}</td>
+              </tr>
+              <tr class="border-b border-slate-700 hover:bg-slate-900/30">
+                <td class="p-4 font-semibold text-white">Profit Split</td>
+                <td class="p-4 text-center border-l border-slate-700">{firmA.profitSplit}</td>
+                <td class="p-4 text-center border-l border-slate-700">{firmB.profitSplit}</td>
+              </tr>
+              <tr class="border-b border-slate-700 hover:bg-slate-900/30">
+                <td class="p-4 font-semibold text-white">Drawdown Type</td>
+                <td class="p-4 text-center border-l border-slate-700">{firmA.drawdown}</td>
+                <td class="p-4 text-center border-l border-slate-700">{firmB.drawdown}</td>
+              </tr>
+              <tr class="border-b border-slate-700 hover:bg-slate-900/30">
+                <td class="p-4 font-semibold text-white">Payout Frequency</td>
+                <td class="p-4 text-center border-l border-slate-700">{firmA.payoutFrequency}</td>
+                <td class="p-4 text-center border-l border-slate-700">{firmB.payoutFrequency}</td>
+              </tr>
+              <tr class="border-b border-slate-700 hover:bg-slate-900/30">
+                <td class="p-4 font-semibold text-white">Min/Max Account</td>
+                <td class="p-4 text-center border-l border-slate-700">${firmA.minAccount/1000}K - ${firmA.maxAccount/1000}K</td>
+                <td class="p-4 text-center border-l border-slate-700">${firmB.minAccount/1000}K - ${firmB.maxAccount/1000}K</td>
+              </tr>
+              <tr class="">
+                <td class="p-4"></td>
+                <td class="p-4 text-center border-l border-slate-700">
+                  <a href={firmA.link} class="btn btn-primary text-sm w-full">Visit {firmA.name}</a>
+                </td>
+                <td class="p-4 text-center border-l border-slate-700">
+                  <a href={firmB.link} class="btn btn-primary text-sm w-full">Visit {firmB.name}</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section bg-slate-900/50">
+      <div class="container max-w-3xl">
+        <h2 class="text-center mb-8">Recommendation</h2>
+        <div class="card">
+           <h3 class="font-bold text-white mb-4">Our Take</h3>
+           <p class="text-gray-300 mb-4">
+             If you prefer a <strong>{firmA.profitSplit} profit split</strong> and are comfortable with <strong>{firmA.drawdown} drawdown</strong>, then <strong>{firmA.name}</strong> is a great choice.
+           </p>
+           <p class="text-gray-300">
+             However, if <strong>{firmB.drawdown} drawdown</strong> is more important to your trading style, consider <strong>{firmB.name}</strong>.
+           </p>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

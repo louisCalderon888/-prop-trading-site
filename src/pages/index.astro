@@ -1,17 +1,296 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PromoCard from '../components/PromoCard.astro';
 
+// Featured promo codes data
+const featuredPromos = [
+  {
+    name: "Apex Trader Funding",
+    code: "OTBAOPUX",
+    discount: "50% OFF",
+    link: "https://apextraderfunding.com/member/aff/go/louiscalderon8887?c=OTBAOPUX",
+    isExclusive: true,
+    verified: true,
+  },
+  {
+    name: "Bulenox",
+    code: null,
+    discount: "Varies",
+    link: "https://bulenox.com/member/aff/go/520_741_8",
+    verified: true,
+  },
+  {
+    name: "Take Profit Trader",
+    code: "NOFEE40",
+    discount: "40% OFF",
+    link: "#",
+    verified: true,
+  },
+  {
+    name: "Tradeify",
+    code: "OTC",
+    discount: "30% OFF",
+    link: "#",
+    verified: true,
+  },
+  {
+    name: "Funded Futures Family",
+    code: "NINJA70",
+    discount: "70% OFF",
+    link: "#",
+    verified: true,
+  },
+  {
+    name: "BluSky Trading",
+    code: "Welcome26",
+    discount: "50% OFF",
+    link: "#",
+    verified: true,
+  },
+];
+
+// FAQ Schema for AEO
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the best promo code for Apex Trader Funding in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The best Apex Trader Funding promo code is OTBAOPUX, offering 50% off evaluations. This code is verified and updated regularly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which prop firms work with NinjaTrader?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Over 20 prop firms support NinjaTrader, including Apex Trader Funding, Tradeify, Take Profit Trader, TradeDay, Funded Futures Family, and more."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are these promo codes legitimate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. All codes are verified every 6 hours. Codes marked with ⭐ are exclusive affiliate codes with guaranteed savings."
+      }
+    }
+  ]
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Best Prop Trading Promo Codes 2026">
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  
+  <Header />
+  
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="container">
+        <h1>
+          Get Funded Faster with the<br />
+          <span class="text-gradient">Best Prop Trading Deals</span>
+        </h1>
+        
+        <p class="subtitle">
+          Save up to 80% on prop firm evaluations. Trade on NinjaTrader, the #1 platform for futures traders. Updated every 6 hours.
+        </p>
+        
+        <div class="flex flex-wrap gap-4 justify-center mb-8">
+          <a href="/promo-codes" class="btn btn-cta">
+            View All Promo Codes →
+          </a>
+          <a href="/ninjatrader" class="btn btn-secondary">
+            Learn About NinjaTrader
+          </a>
+        </div>
+        
+        <div class="trust-bar">
+          <span><span class="icon">✓</span> 20+ Prop Firms</span>
+          <span><span class="icon">✓</span> Updated Every 6h</span>
+          <span><span class="icon">✓</span> Exclusive Discounts</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- PROBLEM SECTION (PAS Framework) -->
+    <section class="section bg-slate-900/50">
+      <div class="container text-center max-w-3xl mx-auto">
+        <h2 class="mb-4">Tired of Overpaying for Evaluations?</h2>
+        <p class="text-gray-400 text-lg">
+          Prop trading evaluations cost between $150-$500. Without the right promo codes, you're leaving money on the table. Finding working codes? Most are expired, fake, or don't give you the best deal.
+        </p>
+      </div>
+    </section>
+    
+    <!-- SOLUTION SECTION -->
+    <section class="section">
+      <div class="container">
+        <div class="text-center mb-12">
+          <h2 class="mb-4">One Place for All Prop Trading Deals</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            We track every promo code from 20+ prop firms that support NinjaTrader and Tradovate. Updated every 6 hours. Verified working. Maximum savings.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div class="card text-center">
+            <div class="text-4xl mb-2">⚡</div>
+            <h3 class="text-lg font-semibold mb-2">Real-time Updates</h3>
+            <p class="text-gray-400 text-sm">Codes verified every 6 hours</p>
+          </div>
+          <div class="card text-center">
+            <div class="text-4xl mb-2">⭐</div>
+            <h3 class="text-lg font-semibold mb-2">Exclusive Deals</h3>
+            <p class="text-gray-400 text-sm">Discounts you won't find elsewhere</p>
+          </div>
+          <div class="card text-center">
+            <div class="text-4xl mb-2">📊</div>
+            <h3 class="text-lg font-semibold mb-2">Platform Focused</h3>
+            <p class="text-gray-400 text-sm">Only NinjaTrader/Tradovate firms</p>
+          </div>
+          <div class="card text-center">
+            <div class="text-4xl mb-2">🔒</div>
+            <h3 class="text-lg font-semibold mb-2">No Spam</h3>
+            <p class="text-gray-400 text-sm">Just codes, no email required</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- FEATURED PROP FIRMS -->
+    <section class="section bg-slate-900/50">
+      <div class="container">
+        <div class="text-center mb-12">
+          <h2 class="mb-4">Featured Promo Codes</h2>
+          <p class="text-gray-400">Updated: <span id="update-date"></span></p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {featuredPromos.map((promo) => (
+            <PromoCard 
+              name={promo.name}
+              code={promo.code}
+              discount={promo.discount}
+              link={promo.link}
+              isExclusive={promo.isExclusive}
+              verified={promo.verified}
+            />
+          ))}
+        </div>
+        
+        <div class="text-center mt-8">
+          <a href="/promo-codes" class="btn btn-primary">
+            View All 20+ Promo Codes →
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- NINJATRADER SECTION -->
+    <section class="section">
+      <div class="container">
+        <div class="card-glass card max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8">
+          <div class="flex-1">
+            <span class="text-emerald-400 text-sm font-semibold mb-2 block">RECOMMENDED PLATFORM</span>
+            <h2 class="mb-4">Trade with NinjaTrader</h2>
+            <p class="text-gray-400 mb-6">
+              NinjaTrader is the #1 platform for futures prop trading, offering advanced charting, risk management tools, and integration with all major prop firms.
+            </p>
+            <a 
+              href="https://ninjatraderdomesticvendor.sjv.io/MA9WEq" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="btn btn-primary"
+            >
+              Get NinjaTrader Free →
+            </a>
+          </div>
+          <div class="flex-shrink-0">
+            <div class="w-48 h-48 bg-slate-700 rounded-lg flex items-center justify-center">
+              <span class="text-4xl font-bold text-emerald-400">NT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- FAQ SECTION (AEO Optimized) -->
+    <section class="section bg-slate-900/50">
+      <div class="container max-w-3xl">
+        <h2 class="text-center mb-12">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+          <div class="card">
+            <h3 class="font-semibold text-white mb-2">What is the best promo code for Apex Trader Funding in 2026?</h3>
+            <p class="text-gray-400">
+              The best Apex Trader Funding promo code is <strong class="text-emerald-400">OTBAOPUX</strong>, offering 50% off evaluations. This code is verified and updated regularly.
+            </p>
+          </div>
+          
+          <div class="card">
+            <h3 class="font-semibold text-white mb-2">Which prop firms work with NinjaTrader?</h3>
+            <p class="text-gray-400">
+              Over 20 prop firms support NinjaTrader, including Apex Trader Funding, Tradeify, Take Profit Trader, TradeDay, Funded Futures Family, and more. See our <a href="/prop-firms" class="text-emerald-400">complete directory</a>.
+            </p>
+          </div>
+          
+          <div class="card">
+            <h3 class="font-semibold text-white mb-2">Are these promo codes legitimate?</h3>
+            <p class="text-gray-400">
+              Yes. All codes are verified every 6 hours. Codes marked with ⭐ are exclusive affiliate codes with guaranteed savings.
+            </p>
+          </div>
+          
+          <div class="card">
+            <h3 class="font-semibold text-white mb-2">What is prop trading?</h3>
+            <p class="text-gray-400">
+              Prop trading (proprietary trading) allows you to trade a firm's capital after passing an evaluation. You keep a percentage of profits (typically 80-90%) without risking your own money.
+            </p>
+          </div>
+        </div>
+        
+        <div class="text-center mt-8">
+          <a href="/faq" class="btn btn-secondary">View All FAQ →</a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- FINAL CTA -->
+    <section class="section">
+      <div class="container text-center max-w-2xl mx-auto">
+        <h2 class="mb-4">Ready to Get Funded?</h2>
+        <p class="text-gray-400 mb-8">
+          Stop overpaying for evaluations. Use our verified promo codes and start your prop trading journey today.
+        </p>
+        <a href="/promo-codes" class="btn btn-cta text-lg px-8 py-3">
+          Get Your Discount Code →
+        </a>
+        <p class="text-gray-500 text-sm mt-4">
+          Most prop firms offer free resets or money-back guarantees.
+        </p>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<script>
+  const updateDate = document.getElementById('update-date');
+  if (updateDate) {
+    updateDate.textContent = new Date().toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+</script>

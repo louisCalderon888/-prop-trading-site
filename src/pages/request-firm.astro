@@ -1,0 +1,112 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "Request a Prop Firm | PropFundingCodes";
+const description = "Don't see your favorite prop firm? Submit a request and we'll add it to our tracking system along with verified promo codes.";
+---
+
+<Layout title={title} description={description}>
+  <Header />
+  
+  <main>
+    <section class="hero bg-slate-900/50 min-h-[40vh]">
+      <div class="container text-center">
+        <h1 class="mb-6">
+          Request a <span class="text-gradient">Prop Firm</span>
+        </h1>
+        <p class="subtitle mx-auto">
+          We track over 20 firms, but if we're missing one, let us know. We'll verify it and add it to our database.
+        </p>
+      </div>
+    </section>
+    
+    <section class="section">
+      <div class="container max-w-2xl">
+        <div class="card bg-slate-800/50 border border-slate-700 p-8">
+          <form id="request-form" class="space-y-6">
+            <div>
+              <label for="firmName" class="block text-sm font-medium text-gray-300 mb-2">Prop Firm Name *</label>
+              <input 
+                type="text" 
+                id="firmName" 
+                name="firmName" 
+                required
+                class="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition"
+                placeholder="e.g. Acme Trader Funding"
+              />
+            </div>
+            
+            <div>
+              <label for="website" class="block text-sm font-medium text-gray-300 mb-2">Website URL *</label>
+              <input 
+                type="url" 
+                id="website" 
+                name="website" 
+                required
+                class="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition"
+                placeholder="https://example.com"
+              />
+            </div>
+            
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Your Email (Optional)</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition"
+                placeholder="We'll notify you when it's added"
+              />
+              <p class="text-xs text-gray-500 mt-1">We respect your privacy. No spam.</p>
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-full py-4 text-lg">
+              Submit Request
+            </button>
+            
+            <p id="form-status" class="text-center text-sm font-medium hidden"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<script>
+  const form = document.getElementById('request-form');
+  const status = document.getElementById('form-status');
+  
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const btn = form.querySelector('button');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "Submitting...";
+      }
+      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      if (status) {
+        status.textContent = "✅ Request received! We'll review it shortly.";
+        status.classList.remove('hidden');
+        status.classList.add('text-emerald-400');
+      }
+      
+      if (btn) {
+        btn.textContent = "Submitted";
+        btn.classList.add('bg-slate-700', 'text-gray-400', 'cursor-not-allowed');
+      }
+      
+       // For demo: log data
+      const formData = new FormData(e.target as HTMLFormElement);
+      console.log('Submission:', Object.fromEntries(formData));
+    });
+  }
+</script>

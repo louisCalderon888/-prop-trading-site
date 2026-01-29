@@ -1,0 +1,238 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import propFirms from '../../data/propfirms.json';
+
+export async function getStaticPaths() {
+  return propFirms.map(firm => ({
+    params: { slug: firm.slug },
+    props: { firm },
+  }));
+}
+
+const { firm } = Astro.props;
+
+const title = `${firm.name} Promo Code 2026 | ${firm.discount} Discount`;
+const description = `Get ${firm.discount} off ${firm.name} evaluations with promo code ${firm.code || 'verified link'}. Read our full review of profit splits, drawdown rules, and payout policies.`;
+
+// AEO: Semantic Feature Descriptions
+const featuresList = firm.features.map(feature => ({
+  "@type": "LocationFeatureSpecification",
+  "name": feature,
+  "value": "True"
+}));
+
+// Schema: Product + FAQ
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": `${firm.name} Evaluation Account`,
+  "description": description,
+  "brand": {
+    "@type": "Brand",
+    "name": firm.name
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "Variable", // Could be dynamic if we had price data
+    "availability": "https://schema.org/InStock",
+    "url": firm.link
+  },
+  "potentialAction": {
+    "@type": "BuyAction",
+    "target": firm.link
+  }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `What is the best promo code for ${firm.name}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": firm.code 
+          ? `The best promo code for ${firm.name} is ${firm.code}, which gives you ${firm.discount}.` 
+          : `There is currently no specific code, but you can get ${firm.discount} using our verified link.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Does ${firm.name} work with NinjaTrader?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `${firm.name} supports NinjaTrader. You can use your own license or the one provided during the evaluation.`
+      }
+    }
+  ]
+};
+---
+
+<Layout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  
+  <Header />
+  
+  <main>
+    <!-- HERO -->
+    <section class="min-h-[50vh] flex flex-col justify-center items-center text-center p-8 bg-slate-900/50">
+      <div class="container">
+        <span class="text-emerald-400 font-mono text-sm mb-4 block">VERIFIED PROP FIRM</span>
+        <h1 class="mb-6">{firm.name} Promo Code</h1>
+        
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 max-w-2xl mx-auto mb-8">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-left">
+              <span class="text-gray-400 text-sm">Best Deal Available</span>
+              <div class="text-3xl font-bold text-white mt-1">{firm.discount}</div>
+            </div>
+            
+            <div class="flex flex-col gap-2 w-full md:w-auto">
+              {firm.code ? (
+                <div class="promo-code justify-center w-full">
+                  <span class="code-text text-xl">{firm.code}</span>
+                  <button class="copy-btn px-4 py-2" data-code={firm.code}>Copy</button>
+                </div>
+              ) : (
+                <span class="text-gray-400 italic">Discount applied automatically</span>
+              )}
+              <a href={firm.link} class="btn btn-cta w-full text-center">Claim Offer →</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="trust-bar justify-center text-gray-400 text-sm">
+          <span>✓ Profit Split: {firm.profitSplit}</span>
+          <span>✓ Drawdown: {firm.drawdown}</span>
+          <span>✓ Payout: {firm.payoutFrequency}</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- DETAILS GRID -->
+    <section class="section">
+      <div class="container">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          <!-- MAIN CONTENT -->
+          <div class="lg:col-span-2 space-y-8">
+            <div class="card">
+              <h2 class="text-2xl font-bold text-white mb-6 w-full">Firm Overview</h2>
+              
+              <div class="prose prose-invert max-w-none">
+                <p>
+                  <strong>{firm.name}</strong> allows you to trade futures with capital up to <strong>${(firm.maxAccount/1000)}K</strong>. 
+                  Unlike opening a personal brokerage account, you don't risk your own capital. 
+                  Instead, you pay a small evaluation fee (starting at around ${(firm.minAccount/1000)*2} with our discount) to prove your skills.
+                </p>
+                
+                <h3 class="text-xl font-bold text-white mt-6 mb-4">Key Features</h3>
+                <ul class="space-y-2">
+                  {firm.features.map(feature => (
+                    <li class="flex items-start gap-2">
+                      <span class="text-emerald-400 mt-1">✓</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                
+                <h3 class="text-xl font-bold text-white mt-6 mb-4">Trading Rules</h3>
+                <p>
+                  To get funded, you must reach the profit target without hitting the <strong>{firm.drawdown} Drawdown</strong>. 
+                  The profit split is <strong>{firm.profitSplit}</strong>, meaning you keep the majority of your earnings.
+                </p>
+              </div>
+            </div>
+            
+            <!-- COMPARE SECTION (Placeholder for programmatic SEO) -->
+            <div class="card">
+              <h3 class="text-xl font-bold text-white mb-4">Compare {firm.name}</h3>
+              <p class="text-gray-400 mb-4">See how {firm.name} stacks up against other top firms:</p>
+              <div class="flex flex-wrap gap-4">
+                <a href={`/compare/${firm.slug}-vs-apex`} class="btn btn-secondary text-sm">vs Apex</a>
+                <a href={`/compare/${firm.slug}-vs-topstep`} class="btn btn-secondary text-sm">vs TopStep</a>
+                <a href={`/compare/${firm.slug}-vs-bulenox`} class="btn btn-secondary text-sm">vs Bulenox</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- SIDEBAR -->
+          <div class="space-y-6">
+            <div class="card sticky top-24">
+              <h3 class="text-lg font-bold text-white mb-4">At a Glance</h3>
+              <div class="space-y-4 text-sm">
+                <div class="flex justify-between border-b border-slate-700 pb-2">
+                  <span class="text-gray-400">Min Account</span>
+                  <span class="text-white">${(firm.minAccount/1000)}K</span>
+                </div>
+                <div class="flex justify-between border-b border-slate-700 pb-2">
+                  <span class="text-gray-400">Max Account</span>
+                  <span class="text-white">${(firm.maxAccount/1000)}K</span>
+                </div>
+                <div class="flex justify-between border-b border-slate-700 pb-2">
+                  <span class="text-gray-400">Profit Split</span>
+                  <span class="text-white text-emerald-400 font-bold">{firm.profitSplit}</span>
+                </div>
+                <div class="flex justify-between border-b border-slate-700 pb-2">
+                  <span class="text-gray-400">Payouts</span>
+                  <span class="text-white">{firm.payoutFrequency}</span>
+                </div>
+                <div class="flex justify-between pb-2">
+                  <span class="text-gray-400">Platform</span>
+                  <span class="text-white capitalize">{firm.platform === 'both' ? 'Ninja / Tradovate' : firm.platform}</span>
+                </div>
+                
+                <a href={firm.link} class="btn btn-primary w-full mt-4">Visit Site →</a>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+    
+    <!-- FAQ SPECIFIC -->
+    <section class="section bg-slate-900/50">
+      <div class="container max-w-3xl">
+        <h2 class="text-center mb-8">FAQ about {firm.name}</h2>
+        <div class="space-y-4">
+          <div class="card">
+            <h3 class="font-bold text-white mb-2">What is the best promo code currently?</h3>
+            <p class="text-gray-400">
+              {firm.code 
+                ? `Use code ${firm.code} to save ${firm.discount}.` 
+                : `Currently, the best deal is ${firm.discount} via our verified link.`}
+            </p>
+          </div>
+          <div class="card">
+            <h3 class="font-bold text-white mb-2">Can I trade during news?</h3>
+            <p class="text-gray-400">
+              Most firms allow trading during news in the evaluation phase, but rules may change for funded accounts. Always check the "${firm.name} Rulebook" on their site.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<script>
+  // Re-use copy logic (could be extracted to a utility)
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const code = btn.getAttribute('data-code');
+      if (code) {
+        await navigator.clipboard.writeText(code);
+        btn.textContent = '✓';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      }
+    });
+  });
+</script>

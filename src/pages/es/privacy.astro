@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = "Política de Privacidad | PropFundingCodes";
+---
+
+<Layout title={title}>
+  <Header />
+  <main class="container py-12 max-w-4xl">
+    <h1 class="mb-8">Política de Privacidad</h1>
+    <div class="card prose prose-invert max-w-none">
+      <p class="text-gray-400">Última actualización: 29 de Enero, 2026</p>
+      
+      <h3>1. Información que Recopilamos</h3>
+      <p>No recopilamos información personal a menos que usted la proporcione voluntariamente (ej. formulario de solicitud). Usamos cookies para mejorar la experiencia.</p>
+      
+      <h3>2. Uso de la Información</h3>
+      <p>Cualquier información proporcionada se usa únicamente para mejorar nuestros servicios. No vendemos sus datos.</p>
+    </div>
+  </main>
+  <Footer />
+</Layout>

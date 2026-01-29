@@ -1,0 +1,93 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PromoCard from '../../components/PromoCard.astro';
+import propFirms from '../../data/propfirms.json';
+
+const title = "Cupones de Prop Trading Activos 2026 | Descuentos Verificados";
+const description = "Ahorra hasta 80% con cupones verificados. Lista de códigos activos para Apex Trader Funding, TopStep, Bulenox y más.";
+
+// Filter only firms with discounts or codes
+const firmsWithOffers = propFirms.filter(firm => firm.discountValue > 0 || firm.code);
+
+const offerSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": firmsWithOffers.map((firm, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "item": {
+      "@type": "Offer",
+      "name": `${firm.discount} en ${firm.name}`,
+      "description": `Obtén ${firm.discount} en evaluaciones de ${firm.name} con código ${firm.code || 'descuento automático'}.`,
+      "url": firm.link
+    }
+  }))
+};
+---
+
+<Layout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(offerSchema)} />
+  
+  <Header />
+  
+  <main>
+    <section class="hero bg-slate-900/50 min-h-[40vh]">
+      <div class="container text-center">
+        <h1 class="mb-4">
+          Cupones <span class="text-gradient">Activos</span>
+        </h1>
+        <p class="subtitle mx-auto">
+          Rastreamos y verificamos cada código diariamente. Deja de buscar en Reddit "códigos activos". Los tenemos todos aquí.
+        </p>
+      </div>
+    </section>
+    
+    <section class="section">
+      <div class="container">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {firmsWithOffers.map((firm) => (
+            <PromoCard 
+              name={firm.name}
+              code={firm.code}
+              discount={firm.discount}
+              link={firm.link}
+              isExclusive={firm.isExclusive}
+              verified={firm.verified}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <section class="section bg-slate-900/50">
+      <div class="container max-w-3xl text-center">
+        <h2 class="mb-4">Nunca Pagues Precio Completo</h2>
+        <p class="text-gray-400 mb-8">
+          Las empresas lanzan ofertas flash constantemente. Únete a nuestro newsletter (pronto) para enterarte de ofertas del 80-90%.
+        </p>
+        
+        <div class="p-4 bg-slate-800 rounded-lg border border-slate-700 inline-block">
+          <p class="text-emerald-400 font-mono text-sm">
+            Última revisión: <span id="last-check"></span>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<script>
+  const lastCheck = document.getElementById('last-check');
+  if (lastCheck) {
+    lastCheck.textContent = new Date().toLocaleDateString('es-ES', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+</script>
